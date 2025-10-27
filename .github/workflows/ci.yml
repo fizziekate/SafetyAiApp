@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload ktlint reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ktlint-reports
           path: app/build/reports/ktlint/**
@@ -75,7 +75,7 @@ jobs:
 
       - name: Upload detekt reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: detekt-reports
           path: app/build/reports/detekt/**
@@ -83,7 +83,7 @@ jobs:
 
       - name: Upload unit test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: unit-test-results
           path: app/build/test-results/testDebugUnitTest/**/*.xml
@@ -91,7 +91,7 @@ jobs:
 
       - name: Upload lint HTML report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: lint-report-debug
           path: app/build/reports/lint-results-debug.html
@@ -99,7 +99,7 @@ jobs:
 
       - name: Upload debug APK
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/*.apk
