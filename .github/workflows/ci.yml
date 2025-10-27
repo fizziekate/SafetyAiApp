@@ -53,6 +53,34 @@ jobs:
         with:
           arguments: :app:lintDebug --no-daemon
 
+      - name: ktlintCheck
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: :app:ktlintCheck --no-daemon
+        continue-on-error: true
+
+      - name: detekt
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: :app:detekt --no-daemon
+        continue-on-error: true
+
+      - name: Upload ktlint reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ktlint-reports
+          path: app/build/reports/ktlint/**
+          if-no-files-found: ignore
+
+      - name: Upload detekt reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: detekt-reports
+          path: app/build/reports/detekt/**
+          if-no-files-found: ignore
+
       - name: Upload unit test results
         if: always()
         uses: actions/upload-artifact@v4
