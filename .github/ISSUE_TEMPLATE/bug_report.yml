@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a bug in SafetyAIApp
+title: "[Bug]: "
+labels: [bug]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug! Please provide details so we can reproduce it.
+  - type: checkboxes
+    id: duplicates
+    attributes:
+      label: Duplicate check
+      options:
+        - label: I searched open/closed issues and PRs; this is not a duplicate.
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen?
+      placeholder: Clear, concise description of the bug
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Provide minimal steps or code to reproduce
+      placeholder: |
+        1. Go to ...
+        2. Tap ...
+        3. Observe ...
+      render: bash
+  - type: input
+    id: version
+    attributes:
+      label: App version (Git tag/commit)
+      placeholder: v0.1.0 or 4277495
+  - type: input
+    id: device
+    attributes:
+      label: Device/Emulator and Android version
+      placeholder: Pixel 7, Android 14
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / stacktrace
+      render: shell
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I can reproduce this on the latest main branch.
+        - label: This is not caused by modified local code.

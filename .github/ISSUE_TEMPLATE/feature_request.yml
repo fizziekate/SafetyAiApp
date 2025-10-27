@@ -1,0 +1,53 @@
+name: Feature request
+description: Suggest an idea for SafetyAIApp
+title: "[Feature]: "
+labels: [enhancement]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your idea! Please share the problem and solution clearly.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What user need or problem does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the change. Include UI/UX notes if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Bullet what is in-scope and out-of-scope
+      placeholder: |
+        In scope:
+        - ...
+        Out of scope:
+        - ...
+  - type: textarea
+    id: testplan
+    attributes:
+      label: Test plan / Acceptance criteria
+      placeholder: |
+        - Given/When/Then ...
+        - Instrumented test(s) ...
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - label: No breaking changes expected
+        - label: Requires new permissions or manifests
+        - label: Adds/updates dependencies
