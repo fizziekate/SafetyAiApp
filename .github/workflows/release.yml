@@ -15,6 +15,11 @@ permissions:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    env:
+      SIGNING_KEYSTORE_BASE64: ${{ secrets.ANDROID_SIGNING_KEYSTORE_BASE64 }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
+      SIGNING_KEY_ALIAS: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,6 +42,13 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
           sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Prepare signing keystore
+        if: env.SIGNING_KEYSTORE_BASE64 != ''
+        shell: bash
+        run: |
+          echo "$SIGNING_KEYSTORE_BASE64" | base64 -d > $GITHUB_WORKSPACE/release.keystore
+          echo "SIGNING_KEYSTORE_PATH=$GITHUB_WORKSPACE/release.keystore" >> $GITHUB_ENV
 
       - name: Build release APK and AAB
         uses: gradle/gradle-build-action@v3

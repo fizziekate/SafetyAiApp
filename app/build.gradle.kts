@@ -19,10 +19,31 @@ android {
         versionName = "1.0"
     }
 
+    // Signing config is injected via environment variables in CI.
+    // Expected env vars: SIGNING_KEYSTORE_PATH, SIGNING_STORE_PASSWORD, SIGNING_KEY_ALIAS, SIGNING_KEY_PASSWORD
+    signingConfigs {
+        create("release") {
+            val ksPath = System.getenv("SIGNING_KEYSTORE_PATH")
+            val ksPass = System.getenv("SIGNING_STORE_PASSWORD")
+            val keyAliasEnv = System.getenv("SIGNING_KEY_ALIAS")
+            val keyPass = System.getenv("SIGNING_KEY_PASSWORD")
+            if (!ksPath.isNullOrBlank() && !ksPass.isNullOrBlank() && !keyAliasEnv.isNullOrBlank() && !keyPass.isNullOrBlank()) {
+                storeFile = file(ksPath)
+                storePassword = ksPass
+                this.keyAlias = keyAliasEnv
+                keyPassword = keyPass
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // Apply signing only if a valid keystore was provided (e.g., in CI)
+            if (signingConfigs.findByName("release")?.storeFile != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         debug {
         }

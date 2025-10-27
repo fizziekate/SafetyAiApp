@@ -42,5 +42,5 @@ High-level architecture
 - Build configuration: `app/build.gradle.kts` sets namespace, SDK levels, Java/Kotlin 17, enables Compose, configures `composeOptions`, and defines debug/release `buildTypes` with ProGuard rules (`proguard-android-optimize` + `proguard-rules.pro`).
 
 Notes
-- CI: `.github/workflows/ci.yml` runs assemble, unit tests, lint, ktlint, and detekt on pushes/PRs. Releases: `.github/workflows/release.yml` builds APK/AAB on tags.
+- CI: `.github/workflows/ci.yml` runs assemble, unit tests, lint, ktlint, and detekt on pushes/PRs. Releases: `.github/workflows/release.yml` builds APK/AAB on tags; set GitHub secrets `ANDROID_SIGNING_KEYSTORE_BASE64`, `ANDROID_SIGNING_STORE_PASSWORD`, `ANDROID_SIGNING_KEY_ALIAS`, `ANDROID_SIGNING_KEY_PASSWORD` to sign releases.
 - See `README.md` for quickstart and `CONTRIBUTING.md` for workflows. Adjust task qualifiers if modules/flavors are added (`:module:assemble<Variant>`).
