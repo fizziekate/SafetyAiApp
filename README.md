@@ -22,6 +22,23 @@ Quickstart (terminal)
 - Instrumented tests: `./gradlew :app:connectedDebugAndroidTest`
 - Lint: `./gradlew :app:lintDebug`
 
+Screenshots
+- Add PNGs in `docs/images/` and they will render below.
+
+![Home](docs/images/home.png)
+![Background work](docs/images/worker.png)
+
+Architecture
+```mermaid
+flowchart TD
+  A[MainActivity (Compose)] --> B[UI Composables]
+  B --> C[ViewModels]
+  C --> D[Hilt DI]
+  D --> E[Workers (WorkManager)]
+  E --> F[TFLite Inference]
+  F --> B
+```
+
 Notes
 - Compose compiler extension is 1.5.11; this project pins Kotlin 1.9.23 per the Compose compatibility map.
 - AGP 8.5.2, Gradle 8.7 via wrapper. Hilt plugin is 2.52; Hilt runtime/processor also 2.52.
