@@ -7,8 +7,9 @@ Project overview
 - Single module: app (see `settings.gradle.kts`). Package/namespace: `com.felicity.safety`. Entry points: `SafetyAIApp` (Application annotated with `@HiltAndroidApp`) and `MainActivity` (Compose host).
 
 Tooling and versions (from Gradle files)
-- Gradle wrapper: 8.7; Android Gradle Plugin: 8.5.2; Kotlin: 1.9.22; Compose compiler extension: 1.5.11.
+- Gradle wrapper: 8.7; Android Gradle Plugin: 8.5.2; Kotlin: 1.9.23; Compose compiler extension: 1.5.11; Hilt plugin: 2.52.
 - compileSdk/targetSdk: 34; minSdk: 26; Java/Kotlin target: 17.
+- Version catalog: see `gradle/libs.versions.toml` for dependency and plugin versions.
 
 Common commands (run from repo root)
 - Gradle wrapper: use `./gradlew` (on Windows, `gradlew.bat`).
@@ -24,6 +25,9 @@ Common commands (run from repo root)
 - Lint
   - Lint (all variants): `./gradlew :app:lint`
   - Lint debug only: `./gradlew :app:lintDebug`
+- Style and static analysis
+  - Ktlint: `./gradlew :app:ktlintCheck` (format: `:app:ktlintFormat`)
+  - Detekt: `./gradlew :app:detekt`
 - Tests
   - JVM unit tests (debug): `./gradlew :app:testDebugUnitTest`
   - Instrumented tests (on device/emulator): `./gradlew :app:connectedDebugAndroidTest`
@@ -38,5 +42,5 @@ High-level architecture
 - Build configuration: `app/build.gradle.kts` sets namespace, SDK levels, Java/Kotlin 17, enables Compose, configures `composeOptions`, and defines debug/release `buildTypes` with ProGuard rules (`proguard-android-optimize` + `proguard-rules.pro`).
 
 Notes
-- The repository currently contains no README or AI assistant rule files; this WARP.md is the primary operational guide.
-- If additional modules or flavors are added later, adjust task qualifiers (e.g., `:module:assemble<Variant>`) accordingly.
+- CI: `.github/workflows/ci.yml` runs assemble, unit tests, lint, ktlint, and detekt on pushes/PRs. Releases: `.github/workflows/release.yml` builds APK/AAB on tags.
+- See `README.md` for quickstart and `CONTRIBUTING.md` for workflows. Adjust task qualifiers if modules/flavors are added (`:module:assemble<Variant>`).

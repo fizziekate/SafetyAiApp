@@ -93,7 +93,10 @@ detekt {
     buildUponDefaultConfig = true
     allRules = false
     autoCorrect = false
-    source = files("src/main/java", "src/main/kotlin", "src/test/java", "src/androidTest/java")
+    source.setFrom(files("src/main/java", "src/main/kotlin", "src/test/java", "src/androidTest/java"))
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     reports {
         html.required.set(true)
         xml.required.set(true)
